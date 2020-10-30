@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required
-def index(request):
+def perfil(request):
 	return render(request, 'index.html',{'perfis' : Perfil.objects.all(),
 										 'perfil_logado' : get_perfil_logado(request)})
 
