@@ -12,7 +12,8 @@ def timeline(request):
     user = get_perfil_logado(request)
     form = PostagemForm()
     friends = user.contatos.all()
-    postagens = Postagem.objects.filter(perfil__in=friends).order_by('data_postagem').reverse()
+    postagens = Postagem.objects.filter(perfil__in=friends) | Postagem.objects.filter(perfil= user)
+    postagens.order_by('data_postagem').reverse()
     context = {'perfil_logado': user,'form':form, 'posts':postagens}
     if request.method=='POST':
         form = PostagemForm(request.POST)
