@@ -1,4 +1,30 @@
 {% extends "base.html" %}
+
 {% block title %}
-    Linha do Tempo
+    Linha do Tempo 
+{% endblock %}
+
+
+{% block body %}
+    <form action="{% url 'timeline' %}" class="form-signin" method="post" >
+        {% csrf_token %}
+        <h3 class = "text-muted">Nova Postagem</h3>
+        <textarea name="texto" class="form-control" id="exampleFormControlTextarea1" maxlength="500" 
+            placeholder="Compartilhe o que você está pensando..." required></textarea>
+        <button class="btn btn-lg btn-info" style="margin-top: 15px;" type="submit" value='login'>Postar</button>
+    </form>
+    {% for post in posts %}
+    <div style="color:#777;margin-top: 20px; width: 100%;height: 100%;border: #777 1px solid; border-radius: 6px;padding: 20px;padding-top: 7px;">
+        <row>
+            <h4 style="color:black;"><b>{{ post.perfil.nome }}</b></h4>
+            <p style="color:black;">{{post.data_postagem}}</p>
+        </row>
+        <row>
+            <div style="width: 100%;height: 100%;">
+                {{post.texto}}
+            </div>
+        </row>
+    </div>
+    {% endfor %}
+
 {% endblock %}

@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from perfis.views import exibir_perfil, convidar, aceitar, perfil, recusar, desfazer
-from posts.views import Timeline
+from posts.views import timeline
 from usuario.views import RegistrarUsuarioView
 from django.contrib.auth import views as v
 
 urlpatterns = [
+    path('',timeline, name='timeline'),
+    
     path('admin/', admin.site.urls),
     path('perfil/', perfil ,name='my_perfil'),
     path('perfil/<int:perfil_id>', exibir_perfil, name='exibir'),
@@ -29,7 +31,6 @@ urlpatterns = [
     path('convite/<int:convite_id>/recusar',recusar, name='recusar'),
     path('perfil/<int:perfil_id>/desfazer',desfazer, name='desfazer'),
 
-    path('/',Timeline.as_view(), name='timeline'),
     
 
     path('registrar/', RegistrarUsuarioView.as_view(), name='registrar'),

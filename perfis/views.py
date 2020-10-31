@@ -26,7 +26,7 @@ def convidar(request,perfil_id):
 	if(perfil_logado.pode_convidar(perfil_a_convidar)):
 		perfil_logado.convidar(perfil_a_convidar)
 	
-	return  redirect('index')
+	return  redirect('/perfil/') 
 
 @login_required
 def get_perfil_logado(request):
@@ -36,16 +36,16 @@ def get_perfil_logado(request):
 def aceitar(request, convite_id):
 	convite = Convite.objects.get(id = convite_id)
 	convite.aceitar()
-	return redirect('index')
+	return redirect('/perfil')
 
 @login_required
 def recusar(request, convite_id):
 	convite = Convite.objects.get(id = convite_id)
 	convite.recusar()
-	return redirect('index')
+	return redirect('/perfil/')
 
 @login_required
 def desfazer(request, perfil_id):
 	perfil = Perfil.objects.get(id=perfil_id)
 	perfil.desfazer(get_perfil_logado(request))
-	return redirect('index')
+	return redirect('/perfil/')
